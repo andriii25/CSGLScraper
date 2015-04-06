@@ -39,7 +39,6 @@ public class ScraperGUI extends JFrame
 	private JTextField keyTextField;
 	private boolean bShouldContain = true;
 	private ArrayList<ArrayList<String>> trades;
-	final JLabel workingLabel;
 	/**
 	 * Launch the application.
 	 */
@@ -121,11 +120,6 @@ public class ScraperGUI extends JFrame
 		keysTextField.setBounds(10, 66, 460, 25);
 		keysTextField.setFont(new Font("Arial", Font.PLAIN, 16));
 		
-		workingLabel = new JLabel("");
-		workingLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		workingLabel.setBounds(256, 536, 200, 35);
-		getContentPane().add(workingLabel);
-		
 		model = new DefaultTableModel()
 		{
 			@Override
@@ -174,7 +168,7 @@ public class ScraperGUI extends JFrame
 				{
 					model.addRow(new Object[]{trades.get(0).get(i), trades.get(1).get(i)});
 				}
-				workingLabel.setText("Finished!");
+				//workingLabel.setText("Finished!");
 				//scrapeButton.setText("Get trades");
 			}
 		});
@@ -262,7 +256,25 @@ public class ScraperGUI extends JFrame
 			}
 		});
 		aboutButton.setBounds(510, 536, 200, 35);
-		getContentPane().add(aboutButton);
+		getContentPane().add(aboutButton);	
+		JButton helpButton = new JButton("Help");
+		helpButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				try 
+				{
+					String url = "https://github.com/andriii25/CSGLScraper/blob/master/README.md";
+					Desktop.getDesktop().browse(new URL(url).toURI());
+				} catch (Exception e)
+				{
+					JOptionPane.showMessageDialog(null, e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		helpButton.setBounds(270, 536, 200, 35);
+		getContentPane().add(helpButton);
+		
 		
 
 		initialize();
@@ -274,8 +286,8 @@ public class ScraperGUI extends JFrame
 	 */
 	private void initialize()
 	{
-		//frame = new JFrame();
-		setBounds(100, 100, 736, 650);
+	
+		setBounds(100, 100, 736, 668);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
