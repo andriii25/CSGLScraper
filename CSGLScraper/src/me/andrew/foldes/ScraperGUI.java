@@ -39,6 +39,7 @@ public class ScraperGUI extends JFrame
 	private JTextField keyTextField;
 	private boolean bShouldContain = true;
 	private ArrayList<ArrayList<String>> trades;
+	final JLabel workingLabel;
 	/**
 	 * Launch the application.
 	 */
@@ -120,7 +121,7 @@ public class ScraperGUI extends JFrame
 		keysTextField.setBounds(10, 66, 460, 25);
 		keysTextField.setFont(new Font("Arial", Font.PLAIN, 16));
 		
-		final JLabel workingLabel = new JLabel("No job at the moment");
+		workingLabel = new JLabel("");
 		workingLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		workingLabel.setBounds(256, 536, 200, 35);
 		getContentPane().add(workingLabel);
@@ -136,15 +137,17 @@ public class ScraperGUI extends JFrame
 		};
 		model.addColumn("Tradelinks");
 		model.addColumn("Trade Context");
-		scrapeButton = new JButton("Scrape");
+		scrapeButton = new JButton("Get trades");
 		scrapeButton.setBounds(580, 33, 130, 25);
 		scrapeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) 
 			{
-				workingLabel.setText("Working...");
+				//workingLabel.setText("Working...");
+				
 				String url = urlTextField.getText();
 				String keyListS = keyTextField.getText();
+				scrapeButton.setText("Working...");
 				StringTokenizer st = new StringTokenizer(keyListS);
 				ArrayList<String> keyList = new ArrayList<String>();
 				int keyNo = (Integer) keyNoSpinner.getValue();
@@ -172,7 +175,7 @@ public class ScraperGUI extends JFrame
 					model.addRow(new Object[]{trades.get(0).get(i), trades.get(1).get(i)});
 				}
 				workingLabel.setText("Finished!");
-				
+				//scrapeButton.setText("Get trades");
 			}
 		});
 		
@@ -255,7 +258,7 @@ public class ScraperGUI extends JFrame
 		aboutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				JOptionPane.showMessageDialog(null, "Made by andriii25\nVersion 1.0\n [githublinkplaceholder", "About", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Made by andriii25\nVersion 1.0\nhttps://github.com/andriii25/CSGLScraper", "About", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		aboutButton.setBounds(510, 536, 200, 35);
